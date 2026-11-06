@@ -23,7 +23,7 @@
   <div class="topbar"><div class="wrap"><span>📍 Near Head Post Office, Khadi Bhandar Road, Dausa</span><span>📞 8824648093 · 8209716734</span></div></div>
   <header><div class="wrap nav">
     <a class="brand" href="#home"><span class="logo">श्री</span><span>SHREE RADHE RANI<small>eMitra & CSC Center · Dausa</small></span></a>
-    <nav class="links" id="navlinks"><a href="#home">Home</a><a href="#services">Services</a><a href="#booking">Online Booking</a><a href="#tracking">Track Booking</a><a href="#contact">Contact</a></nav>
+    <nav class="links" id="navlinks"><a href="#home">Home</a><a href="#services">Services</a><a href="#booking">Online Booking</a><a href="#tracking">Track Booking</a><a href="#contact">Contact</a><a href="#admin">Admin</a></nav>
     <button class="menu" aria-label="Open menu" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
   </div></header>
   <main>
@@ -56,16 +56,37 @@
         </form>
       </div>
       <div class="panel" id="tracking"><h3>बुकिंग स्टेटस चेक करें</h3><p>अपना Booking ID डालकर स्टेटस जानें।</p>
-        <div class="field"><label for="bookingId">Booking ID</label><input id="bookingId" placeholder="उदाहरण: SRR-2026-0001"></div>
+        <div class="field"><label for="bookingId">Booking ID</label><input id="bookingId" placeholder="बुकिंग ID"></div>
+        <div class="field"><label for="trackPhone">बुकिंग में दिया मोबाइल नंबर</label><input id="trackPhone" inputmode="numeric" maxlength="10" placeholder="10 अंकों का मोबाइल नंबर"></div>
         <button class="btn btn-primary" type="button" onclick="trackBooking()">स्टेटस चेक करें</button>
         <div class="track-result" id="trackResult" role="status">अभी ऑनलाइन ट्रैकिंग डेटाबेस कनेक्ट नहीं है। अपनी बुकिंग का स्टेटस जानने के लिए WhatsApp पर Booking ID भेजें।</div>
-        <div class="note" style="margin-top:16px">नोट: इस शुरुआती वर्जन में बुकिंग WhatsApp के जरिए आती है। ऑनलाइन Booking ID, ग्राहक लॉगिन और लाइव स्टेटस के लिए सुरक्षित डेटाबेस अगला चरण है।</div>
+        <div class="note" style="margin-top:16px">बुकिंग ID और वही मोबाइल नंबर डालें जो बुकिंग करते समय दिया था।</div>
       </div></div>
     </div></section>
     <section id="payment"><div class="wrap"><div class="two">
       <div class="panel"><div class="kicker">UPI payment</div><h3>UPI से भुगतान</h3><p>भुगतान करने से पहले सेवा शुल्क और राशि केंद्र से कन्फर्म करें।</p><div class="contact-item"><span style="font-size:24px">💳</span><div><b>UPI ID</b><span>radherani@upi</span></div></div><div class="actions"><a class="btn btn-primary" href="upi://pay?pa=radherani@upi&pn=Shree%20Radhe%20Rani%20eMitra&cu=INR">UPI App खोलें</a></div><div class="note" style="margin-top:14px">भुगतान की पुष्टि फिलहाल केंद्र द्वारा की जाएगी। यह वेबसाइट अपने आप पेमेंट सत्यापित नहीं करती। UPI PIN किसी के साथ साझा न करें।</div></div>
       <div class="panel"><div class="kicker">Why choose us</div><h3>हमसे क्यों जुड़ें?</h3><p>स्थानीय स्तर पर डिजिटल सेवाओं के लिए आसान संपर्क और सहायता।</p><div class="contact-item"><span>✓</span><div><b>आसान संपर्क</b><span>फोन और WhatsApp के माध्यम से जानकारी।</span></div></div><div class="contact-item" style="margin-top:10px"><span>✓</span><div><b>ऑनलाइन अनुरोध</b><span>घर से सेवा अनुरोध भेजने की सुविधा।</span></div></div><div class="contact-item" style="margin-top:10px"><span>✓</span><div><b>स्थानीय केंद्र</b><span>Dausa में दुकान पर आकर भी संपर्क करें।</span></div></div></div>
     </div></div></section>
+
+    <section id="admin"><div class="wrap"><div class="section-head"><div class="kicker">Admin access</div><h2>Admin Panel</h2><p>केवल अधिकृत दुकान व्यवस्थापक के लिए।</p></div>
+      <div class="panel" style="max-width:760px;margin:auto">
+        <div id="adminLoginBox">
+          <h3>Admin Login</h3>
+          <div class="field"><label for="adminEmail">Admin Email</label><input id="adminEmail" type="email" autocomplete="username" placeholder="आपका admin email"></div>
+          <div class="field"><label for="adminPassword">Password</label><input id="adminPassword" type="password" autocomplete="current-password" placeholder="Admin password"></div>
+          <button class="btn btn-primary" type="button" onclick="adminLogin()">Login</button>
+          <div class="result" id="adminLoginResult" role="status"></div>
+        </div>
+        <div id="adminDashboard" style="display:none">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+            <h3>Booking Management</h3><button class="btn" style="background:#edf4fc;color:#174d91" onclick="adminLogout()">Logout</button>
+          </div>
+          <button class="btn btn-primary" type="button" onclick="loadBookings()">Refresh Bookings</button>
+          <div id="adminBookings" style="margin-top:16px;overflow-x:auto"></div>
+        </div>
+        <div class="note" style="margin-top:16px">Admin account Supabase में बनाया जाएगा। इस पेज में कोई admin password या secret key सेव नहीं है।</div>
+      </div>
+    </div></section>
     <section class="soft" id="contact"><div class="wrap"><div class="section-head"><div class="kicker">Contact us</div><h2>हमसे संपर्क करें</h2><p>सेवा, दस्तावेज या शुल्क की जानकारी के लिए संपर्क करें।</p></div>
       <div class="panel"><div class="contact-grid">
         <div class="contact-item"><span>📍</span><div><b>पता</b><span>Near Head Post Office, Khadi Bhandar Road, Dausa, Rajasthan 303303</span></div></div>
@@ -77,27 +98,118 @@
   </main>
   <footer><div class="wrap foot"><div><strong>SHREE RADHE RANI eMitra & CSC Center</strong><br><small>Dausa, Rajasthan</small></div><small>© <span id="year"></span> Shree Radhe Rani. All rights reserved.</small></div></footer>
   <a class="wa" href="https://wa.me/918824648093" target="_blank" rel="noopener" aria-label="WhatsApp">✆</a>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-    document.getElementById('bookingForm').addEventListener('submit', function(e){
+
+    // Supabase project URL and publishable/anon key yahan paste karein.
+    // Secret/service_role key kabhi bhi website mein paste na karein.
+    const SUPABASE_URL = "https://fbkjqstllkekpyfetwgv.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_AAYSJjQoCUKVLyPt0UYWOg_6xffbWzG";
+    const supabaseReady = SUPABASE_URL.startsWith("https://") &&
+      !SUPABASE_URL.includes("PASTE_") && !SUPABASE_ANON_KEY.includes("PASTE_");
+    const sb = supabaseReady ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
+    function showResult(id, message, isError=false) {
+      const box = document.getElementById(id);
+      box.style.display = 'block';
+      box.textContent = message;
+      box.style.background = isError ? '#fff0f0' : '#eaf8f0';
+      box.style.color = isError ? '#8b1e1e' : '#145b35';
+    }
+
+    document.getElementById('bookingForm').addEventListener('submit', async function(e){
       e.preventDefault();
+      if (!sb) { showResult('bookingResult', 'वेबसाइट डेटाबेस से अभी कनेक्ट नहीं है। Admin setup पूरा होने के बाद बुकिंग शुरू होगी।', true); return; }
       const name=document.getElementById('customer').value.trim();
       const phone=document.getElementById('phone').value.trim();
       const service=document.getElementById('service').value;
       const details=document.getElementById('details').value.trim();
-      if(!/^[0-9]{10}$/.test(phone)){alert('कृपया सही 10 अंकों का मोबाइल नंबर भरें।');return;}
-      const msg=`नमस्ते, मुझे Shree Radhe Rani eMitra & CSC Center से सेवा बुक करनी है।\nनाम: ${name}\nमोबाइल: ${phone}\nसेवा: ${service}\nजानकारी: ${details||'नहीं दी गई'}`;
-      document.getElementById('bookingResult').style.display='block';
-      document.getElementById('bookingResult').textContent='WhatsApp खुल रहा है। संदेश जाँचकर Send दबाएँ।';
+      if(!/^[0-9]{10}$/.test(phone)){showResult('bookingResult','कृपया सही 10 अंकों का मोबाइल नंबर भरें।',true);return;}
+      const { data, error } = await sb.rpc('create_booking', {
+        p_customer_name: name, p_phone: phone, p_service: service, p_details: details || null
+      });
+      if (error) { showResult('bookingResult', 'बुकिंग सेव नहीं हुई: ' + error.message, true); return; }
+      const bookingId = data;
+      showResult('bookingResult', 'आपकी बुकिंग सेव हो गई है। Booking ID: ' + bookingId + ' — इसे सुरक्षित रखें।');
+      const msg=`नमस्ते, मेरी वेबसाइट बुकिंग हो गई है।\nBooking ID: ${bookingId}\nनाम: ${name}\nमोबाइल: ${phone}\nसेवा: ${service}\nजानकारी: ${details || 'नहीं दी गई'}`;
       window.open('https://wa.me/918824648093?text='+encodeURIComponent(msg),'_blank','noopener');
+      this.reset();
     });
-    function trackBooking(){
+
+    async function trackBooking(){
       const id=document.getElementById('bookingId').value.trim();
-      const box=document.getElementById('trackResult');
-      box.style.display='block';
-      box.textContent=id ? `Booking ID ${id} के लिए लाइव स्टेटस सुविधा अभी डेटाबेस से कनेक्ट नहीं है। कृपया यह ID WhatsApp पर भेजें।` : 'कृपया पहले Booking ID डालें।';
-      if(id){const link='https://wa.me/918824648093?text='+encodeURIComponent('नमस्ते, मेरी Booking ID '+id+' का स्टेटस बताएं।');box.innerHTML+=' <a href="'+link+'" target="_blank" rel="noopener" style="font-weight:800;color:#1757a6">WhatsApp पर पूछें</a>';}
+      const phone=document.getElementById('trackPhone').value.trim();
+      if (!sb) { showResult('trackResult','डेटाबेस कनेक्ट नहीं है।',true); return; }
+      if (!id || !/^[0-9]{10}$/.test(phone)) { showResult('trackResult','Booking ID और सही 10 अंकों का मोबाइल नंबर भरें।',true); return; }
+      const { data, error } = await sb.rpc('get_booking_status', { p_booking_id: id, p_phone: phone });
+      if (error) { showResult('trackResult','स्टेटस नहीं मिल पाया: ' + error.message,true); return; }
+      if (!data || data.length === 0) { showResult('trackResult','इस Booking ID और मोबाइल नंबर से कोई बुकिंग नहीं मिली।',true); return; }
+      const b = data[0];
+      showResult('trackResult', `Booking ID: ${b.booking_id} | सेवा: ${b.service} | स्थिति: ${b.status} | तारीख: ${new Date(b.created_at).toLocaleString('hi-IN')}`);
     }
+
+    async function adminLogin(){
+      if (!sb) { showResult('adminLoginResult','पहले Supabase URL और Publishable/Anon Key सेट करें।',true); return; }
+      const email=document.getElementById('adminEmail').value.trim();
+      const password=document.getElementById('adminPassword').value;
+      const { error } = await sb.auth.signInWithPassword({ email, password });
+      if (error) { showResult('adminLoginResult','Login नहीं हुआ: ' + error.message,true); return; }
+      const { data: allowed, error: roleError } = await sb.rpc('is_admin');
+      if (roleError || !allowed) {
+        await sb.auth.signOut();
+        showResult('adminLoginResult','इस अकाउंट को Admin अनुमति नहीं मिली है।',true);
+        return;
+      }
+      document.getElementById('adminLoginBox').style.display='none';
+      document.getElementById('adminDashboard').style.display='block';
+      loadBookings();
+    }
+
+    async function adminLogout(){
+      if (sb) await sb.auth.signOut();
+      document.getElementById('adminDashboard').style.display='none';
+      document.getElementById('adminLoginBox').style.display='block';
+    }
+
+    async function loadBookings(){
+      const box=document.getElementById('adminBookings');
+      box.textContent='बुकिंग लोड हो रही हैं...';
+      const { data, error } = await sb.from('bookings').select('id,booking_id,customer_name,phone,service,details,status,created_at').order('created_at',{ascending:false}).limit(100);
+      if (error) { box.textContent='डेटा लोड नहीं हुआ: '+error.message; return; }
+      if (!data.length) { box.textContent='अभी कोई बुकिंग नहीं है।'; return; }
+      const table=document.createElement('table');
+      table.style.cssText='width:100%;border-collapse:collapse;font-size:13px';
+      table.innerHTML='<thead><tr><th>Booking ID</th><th>ग्राहक</th><th>मोबाइल</th><th>सेवा</th><th>जानकारी</th><th>स्थिति</th><th>अपडेट</th></tr></thead>';
+      const tbody=document.createElement('tbody');
+      data.forEach(b=>{
+        const tr=document.createElement('tr');
+        [b.booking_id,b.customer_name,b.phone,b.service,b.details || '-'].forEach(v=>{
+          const td=document.createElement('td'); td.textContent=v; td.style.cssText='padding:9px;border-top:1px solid #e4eaf2'; tr.appendChild(td);
+        });
+        const statusTd=document.createElement('td'); const select=document.createElement('select');
+        ['Pending','Processing','Completed','Rejected'].forEach(s=>{const o=document.createElement('option');o.value=s;o.textContent=s;if(s===b.status)o.selected=true;select.appendChild(o);});
+        select.style.cssText='padding:7px;border:1px solid #d7e0ec;border-radius:8px'; statusTd.appendChild(select);statusTd.style.cssText='padding:9px;border-top:1px solid #e4eaf2';tr.appendChild(statusTd);
+        const actionTd=document.createElement('td');const btn=document.createElement('button');btn.textContent='Save';btn.className='btn btn-primary';btn.style.padding='8px 10px';
+        btn.onclick=async()=>{const {error}=await sb.from('bookings').update({status:select.value}).eq('id',b.id);if(error)alert('अपडेट नहीं हुआ: '+error.message);else{btn.textContent='Saved';setTimeout(()=>btn.textContent='Save',1400);}};
+        actionTd.appendChild(btn);actionTd.style.cssText='padding:9px;border-top:1px solid #e4eaf2';tr.appendChild(actionTd);tbody.appendChild(tr);
+      });
+      table.appendChild(tbody);box.replaceChildren(table);
+    }
+
+    // Restore an existing signed-in admin session after refresh.
+    (async function restoreAdmin(){
+      if (!sb) return;
+      const { data:{session} } = await sb.auth.getSession();
+      if (session) {
+        const { data: allowed } = await sb.rpc('is_admin');
+        if (allowed) {
+          document.getElementById('adminLoginBox').style.display='none';
+          document.getElementById('adminDashboard').style.display='block';
+          loadBookings();
+        } else await sb.auth.signOut();
+      }
+    })();
   </script>
 </body>
 </html>
